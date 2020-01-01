@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "next",
     "build": "next build",
     "start": "next start"
@@ -13,13 +13,27 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dfb-luis-apps-lib": "git://github.com/diberry/dfb-luis-apps-lib.git",
     "next": "^9.1.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.25",
     "@types/node": "^13.1.1",
     "@types/react": "^16.9.17",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^24.9.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "react-addons-test-utils": "^15.6.2",
+    "react-hooks": "^1.0.1",
+    "react-test-renderer": "^16.12.0",
     "typescript": "^3.7.4"
   }
 }
