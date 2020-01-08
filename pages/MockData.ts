@@ -1,5 +1,7 @@
-{
-  "apps": [
+
+import { ILuisApp } from "dfb-luis-apps-lib"
+
+export const MockDataFull: ILuisApp [] = [
     {
       "id": "ee6b7c58-9b19-477d-ae52-6aeed8fbad07",
       "name": "pattern app",
@@ -3437,27 +3439,5 @@
         }
       ]
     }
-  ],
-  "columns": [
-    {
-      "Header": "Id",
-      "accessor": "id"
-    },
-    {
-      "Header": "Name",
-      "accessor": "name"
-    },
-    {
-      "Header": "Active version",
-      "accessor": "activeVersion"
-    },
-    {
-      "Header": "Versions",
-      "accessor": "versionsCount"
-    },
-    {
-      "Header": "Date created",
-      "accessor": "createdDateTime"
-    }
-  ]
-}
+  ];
+

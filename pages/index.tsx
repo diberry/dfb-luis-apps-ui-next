@@ -1,31 +1,43 @@
+import React from "react";
 import { NextPage } from "next"
 import { useState } from "react"
 import { FormLuisAuthSettings, getLuisApps } from "../libs/luisGetApps"
 import { FormLuisAuth } from "../components/formLuisAuth"
-import { LuisApps } from "dfb-luis-apps-lib"
+import { LuisApps, ILuisApp } from "dfb-luis-apps-lib"
+import { Apps } from '../components/appsLuis'
+import { MockDataFull } from './MockData';
 
 const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => {
+
+  const test = true
+
   const [apps, setApps] = useState([] as LuisApps[])
-  const [luisAuth, setLuisAuth] = useState({} as FormLuisAuthSettings)
+
+  console.log(new Date().toLocaleString() + " " + JSON.stringify(userAgent))
 
   const onSubmit = async (
     formLuisAuthSettings: FormLuisAuthSettings
   ): Promise<any> => {
-    setLuisAuth(formLuisAuthSettings)
-    const luisApps = await getLuisApps(formLuisAuthSettings)
 
-    console.log(JSON.stringify(luisApps))
+    var luisApps:LuisApps[] = [];
+
+    if (!test){
+      luisApps = await getLuisApps(formLuisAuthSettings)
+    } else {
+      luisApps = MockDataFull;
+    }
+
+    console.log(new Date().toLocaleString() + " " + JSON.stringify(luisApps))
 
     setApps(luisApps)
   }
 
+  console.log(`index data length apps = ${apps.length}`)
+
   return (
     <div>
-      <h6>Hello world! - user agent: {userAgent}</h6>
       <FormLuisAuth onSubmit={onSubmit} />
-      <div>Apps length {apps.length}</div>
-      <div>After fetch{JSON.stringify(luisAuth)}</div>
-      <div>After fetch{JSON.stringify(apps)}</div>
+      <Apps data={apps}></Apps>
     </div>
   )
 }
