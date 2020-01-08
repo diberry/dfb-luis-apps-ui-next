@@ -3,7 +3,7 @@ import { NextPage } from "next"
 import { useState } from "react"
 import { FormLuisAuthSettings, getLuisApps } from "../libs/luisGetApps"
 import { FormLuisAuth } from "../components/formLuisAuth"
-import { LuisApps, ILuisApp } from "dfb-luis-apps-lib"
+import { LuisApps } from "dfb-luis-apps-lib"
 import { Apps } from '../components/appsLuis'
 import { MockDataFull } from './MockData';
 
