@@ -5,7 +5,6 @@ import { FormLuisAuthSettings, getLuisApps } from "../libs/luisGetApps"
 import { FormLuisAuth } from "../components/formLuisAuth"
 import { LuisApps } from "dfb-luis-apps-lib"
 import { Apps } from '../components/appsLuis'
-import { MockDataFull } from './MockData';
 
 const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => {
 
@@ -19,12 +18,13 @@ const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => {
     formLuisAuthSettings: FormLuisAuthSettings
   ): Promise<any> => {
 
-    var luisApps:LuisApps[] = [];
+    var luisApps:any[] = [];
 
     if (!test){
       luisApps = await getLuisApps(formLuisAuthSettings)
     } else {
-      luisApps = MockDataFull;
+      const tableData = require('./MockData.json');
+      luisApps = tableData.apps;
     }
 
     console.log(new Date().toLocaleString() + " " + JSON.stringify(luisApps))
@@ -32,7 +32,7 @@ const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => {
     setApps(luisApps)
   }
 
-  console.log(`index data length apps = ${apps.length}`)
+  console.log(`index data length= ${apps.length}`)
 
   return (
     <div>
