@@ -10,8 +10,11 @@ export const FormLuisAuth = (formProps: FormLuisAuthProps) => {
     key: "",
     endpoint: "",
     versions: false,
-    models: false
-  })
+    models: false,
+    pivot: true,
+    mockData: true
+  } as FormLuisAuthSettings)
+
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
@@ -23,7 +26,9 @@ export const FormLuisAuth = (formProps: FormLuisAuthProps) => {
       versions: luisAuth.versions,
       models: luisAuth.models,
       endpoint: event.currentTarget.value,
-      key: luisAuth.key
+      key: luisAuth.key,
+      pivot: luisAuth.pivot,
+      mockData: luisAuth.mockData
     })
   }
 
@@ -32,7 +37,9 @@ export const FormLuisAuth = (formProps: FormLuisAuthProps) => {
       versions: luisAuth.versions,
       models: luisAuth.models,
       endpoint: luisAuth.endpoint,
-      key: event.currentTarget.value
+      key: event.currentTarget.value,
+      pivot: luisAuth.pivot,
+      mockData: luisAuth.mockData
     })
   }
 
@@ -43,7 +50,22 @@ export const FormLuisAuth = (formProps: FormLuisAuthProps) => {
       versions: checked,
       models: false,
       endpoint: luisAuth.endpoint,
-      key: luisAuth.key
+      key: luisAuth.key,
+      pivot: luisAuth.pivot,
+      mockData: luisAuth.mockData
+    })
+  }
+
+  const handleClickPivotTable = (event: React.FormEvent<HTMLInputElement>) => {
+    const checked = event.currentTarget.checked ? true : false
+
+    setLuisAuth({
+      versions: luisAuth.versions,
+      models: luisAuth.models,
+      endpoint: luisAuth.endpoint,
+      key: luisAuth.key,
+      pivot: checked,
+      mockData: luisAuth.mockData
     })
   }
 
@@ -56,7 +78,24 @@ export const FormLuisAuth = (formProps: FormLuisAuthProps) => {
       versions: checked,
       models: checked,
       endpoint: luisAuth.endpoint,
-      key: luisAuth.key
+      key: luisAuth.key,
+      pivot: luisAuth.pivot,
+      mockData: luisAuth.mockData
+    })
+  }
+
+  const handleClickMockData = (
+    event: React.FormEvent<HTMLInputElement>
+  ) => {
+    const checked = event.currentTarget.checked ? true : false
+
+    setLuisAuth({
+      versions: luisAuth.versions,
+      models: luisAuth.models,
+      endpoint: luisAuth.endpoint,
+      key: luisAuth.key,
+      pivot: luisAuth.pivot,
+      mockData: checked
     })
   }
 
@@ -95,9 +134,27 @@ export const FormLuisAuth = (formProps: FormLuisAuthProps) => {
         />
         Versions and models
         <br />
+        <input
+          checked={luisAuth.pivot}
+          type="checkbox"
+          onChange={handleClickPivotTable}
+          onBlur={handleClickPivotTable}
+        />
+        Pivot table
+        <br />
+        <input
+          checked={luisAuth.mockData}
+          type="checkbox"
+          onChange={handleClickMockData}
+          onBlur={handleClickMockData}
+        />
+        Mock data
+        <br />
         <button type="submit">Submit</button>
       </form>
-      <div>Before fetch{JSON.stringify(luisAuth)}</div>
+      <hr></hr>
+      <div>{JSON.stringify(luisAuth)}</div>
+      <hr></hr>
     </div>
   )
 }
