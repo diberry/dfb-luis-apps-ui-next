@@ -17,11 +17,12 @@ const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => {
     formLuisAuthSettings: FormLuisAuthSettings
   ): Promise<any> => {
 
-    var luisApps:any[] = [];
-    luisApps = await getLuisApps(formLuisAuthSettings)
+    const luisApps = await getLuisApps(formLuisAuthSettings)
 
-    setApps(luisApps)
-    setPivot(formLuisAuthSettings.pivot)
+    if(luisApps?.apps?.length>0) {
+      setApps(luisApps)
+      setPivot(formLuisAuthSettings.pivot)
+    }
   }
 
   return (

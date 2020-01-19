@@ -14,8 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/match-sorter": "^4.0.0",
     "@zeit/next-css": "^1.0.1",
     "dfb-luis-apps-lib": "git://github.com/diberry/dfb-luis-apps-lib.git",
+    "match-sorter": "^4.0.2",
     "next": "^9.1.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
