@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "next -p 8080",
+    "dev": "next -p 3000",
     "build": "next build",
-    "start": "next start",
-    "format": "prettier --write \"**/*.+(ts|tsx|js|jsx|json|css|md)\""
+    "start": "next start -p $PORT",
+    "format": "prettier --write \"**/*.+(ts|tsx|js|jsx|json|css|md)\"",
+    "postinstall": "next build"
   },
   "keywords": [],
   "author": "",
