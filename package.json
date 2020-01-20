@@ -1,13 +1,13 @@
 {
   "name": "dfb-luis-apps-ui-next",
-  "version": "1.0.3",
-  "description": "",
+  "version": "1.0.4",
+  "description": "8080",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "next -p 3000",
+    "dev": "next -p 8080",
     "build": "next build",
-    "start": "next start -p 3000",
+    "start": "next start -p 8080",
     "format": "prettier --write \"**/*.+(ts|tsx|js|jsx|json|css|md)\"",
     "postinstall": "next build"
   },
