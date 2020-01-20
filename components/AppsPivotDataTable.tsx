@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 //import { IFull } from 'dfb-luis-apps-lib';
-import matchSorter from 'match-sorter';
+//import matchSorter from 'match-sorter';
 
 interface IProps {
     data: any[];
@@ -74,7 +74,7 @@ return {};
     useEffect(() => {
         // Update the document title using the browser API
         initializeTableData(props.data)
-        console.log(`appsDataTable data length = ${selectedData.length}`)
+        console.log(`appsDataTable data length = ${props.data.length}`)
     }, [props.data]);
 
 
@@ -126,48 +126,66 @@ return {};
                         getTrProps={getTrProps}
                         collapseOnSortingChange={false}
     */
-   /*
-   const filterAllSubrowsVersion =  (filter: any, row: any, column: any) =>{
-    const id = filter.pivotId || filter.id;
+    /*
+    const filterAllSubrowsVersion =  (filter: any, row: any, column: any) =>{
+     const id = filter.pivotId || filter.id;
 
-    console.log(`column ${JSON.stringify(column)}`);
+     console.log(`column ${JSON.stringify(column)}`);
 
-    const searchFor = filter.value.toLowerCase();
-    const matchSorterFilter = matchSorter(row._subRows, searchFor, { keys: [id] });
+     const searchFor = filter.value.toLowerCase();
+     const matchSorterFilter = matchSorter(row._subRows, searchFor, { keys: [id] });
 
-    console.log(`${id} matchSorterFilter = ${matchSorterFilter}`);
+     console.log(`${id} matchSorterFilter = ${matchSorterFilter}`);
 
-    const finalTest = matchSorterFilter || true;
-    return finalTest;
-}*/
-const defaultRowFilterMethod = (filter: any, row: any, column: any) => {
+     const finalTest = matchSorterFilter || true;
+     return finalTest;
+ }*/
+    const dataIncludesTerm = (data: string, term: string) => {
+        return data != undefined
+            ? String(data).toLowerCase().includes(term.toLowerCase())
+            : true;
+    }
+    const defaultFilterMethod = (filter: any, row: any, column: any) => {
 
-    console.log(`column ${JSON.stringify(column)}`);
+        if(Array.isArray(row))console.log("row is array");
 
-    const id = filter.pivotId || filter.id
-    return row[id] !== undefined
-      ? String(row[id]).startsWith(filter.value)
-      : true
-  }
-    const filterPivotRow =  (filter: any, row: any, column: any) =>{
-        const id = filter.pivotId || filter.id;
+        const searchTerm = filter.value.toLowerCase();
+        const id = filter.pivotId || filter.id || column.id;
+        const data = row[id];
 
-        console.log(`column ${JSON.stringify(column)}`);
+        const result = dataIncludesTerm(data, searchTerm);
+        console.log(`${id} defaultFilterMethod = ${data}, ${searchTerm} final ${result}`);
 
-        const rowValue = String(row[id]).toLowerCase();
+        return result;
+    }/*
+    const defaultRowFilterMethod = (filter: any, row: any, column: any) => {
+
+        return defaultFilterMethod(filter, row, column);
+    }
+    const filterPivotRow = (filter: any, row: any, column: any) => {
+
+        const id = filter.pivotId || filter.id || column.id;
+
         const searchFor = filter.value.toLowerCase();
 
-        const basicFilter = String(row[id]).startsWith(filter.value);
-        const advancedFilter = rowValue.includes(searchFor);
-        const matchSorterFilter = matchSorter(row, searchFor, { keys: [id] });
 
-        console.log(`${id} basic = ${basicFilter}`);
-        console.log(`${id} advancedFilter = ${advancedFilter}`);
-        console.log(`${id} matchSorterFilter = ${matchSorterFilter}`);
+        if (Array.isArray(row)){
+            const matchSorterFilter = matchSorter(row, searchFor, { keys: [id] });
+            const matchResult = matchSorterFilter || true;
+            console.log(`row defaultRowPivot ${id} = ${matchSorterFilter.length}`);
+            return matchResult;
 
-        return matchSorterFilter || true;
+        } else {
+            const matchSorterFilter = matchSorter([row], searchFor, { keys: [id] });
+            const matchResult = matchSorterFilter || true;
+            console.log(`1 defaultRowPivot ${id} = ${matchResult}`);
+            return matchResult;
+        }
+
+
+
     }
-
+*/
     return (
 
         <div >
@@ -178,38 +196,35 @@ const defaultRowFilterMethod = (filter: any, row: any, column: any) => {
                     <ReactTable
                         data={selectedData}
                         filterable
+                        defaultPageSize={10}
+                        pivotBy={["appName"]}
                         defaultSorted={[
                             { id: "appName", desc: false },
-                            { id: "version", desc: true }
-                          ]}
+                            { id: "version", desc: false }
+                        ]}
+                        defaultFilterMethod = {defaultFilterMethod}
                         collapseOnSortingChange={false}
-
-                        minRows={0}
-                        pivotBy={["appName"]}
                         columns={[{
                             Header: 'App ID',
-                            accessor: 'appId'
+                            id: "appId",
+                            accessor: (d:any) => d.appId
                         }, {
                             Header: 'App Name',
-                            accessor: 'appName',
-                            filterMethod: filterPivotRow,
-                            filterAll: true
+                            accessor: 'appName'
                         },
                         {
                             Header: 'Version',
-                            accessor: "version",
-                            filterMethod: defaultRowFilterMethod,
-                            filterAll: false
-                        },
+                            accessor: "version"
+                        }
+                        ,
                         {
                             Header: 'Model',
-                            accessor: "modelName",
-                            filterMethod: filterPivotRow,
-                            filterAll: false
-                        },
+                            accessor: "modelName"
+                        }
+                        ,
                         {
-                            Header: 'Model type',
-                            accessor: 'modelReadableType',
+                            Header: 'ModelReadableType',
+                            accessor: "modelReadableType"
                         }
                         ]}
                     />
