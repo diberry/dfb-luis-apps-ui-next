@@ -1,5 +1,5 @@
 # docker build --no-cache -t diberry/cog-mod-mgmt-ui .
-# docker run -d -p 3000:3000 diberry/cog-mod-mgmt-ui:latest
+# docker run -d -p 8080:8080 diberry/cog-mod-mgmt-ui:latest
 # winpty docker run --rm -it -p 3000:3000 t1 bash
 
 FROM node:10
@@ -20,7 +20,7 @@ RUN git clone https://github.com/diberry/dfb-luis-apps-ui-next.git && \
 
 WORKDIR /usr/src/app/dfb-luis-apps-ui-next
 
-EXPOSE 3000-3005:3000-3005
+EXPOSE 8080:8080
 
 # Running the app
 CMD [ "npm", "start" ]
