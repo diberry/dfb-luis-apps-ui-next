@@ -1,13 +1,13 @@
 {
   "name": "dfb-luis-apps-ui-next",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "dev": "next -p 3000",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "next start -p 3000",
     "format": "prettier --write \"**/*.+(ts|tsx|js|jsx|json|css|md)\"",
     "postinstall": "next build"
   },
@@ -15,17 +15,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/match-sorter": "^4.0.0",
-    "@zeit/next-css": "^1.0.1",
-    "dfb-luis-apps-lib": "git://github.com/diberry/dfb-luis-apps-lib.git",
-    "match-sorter": "^4.0.2",
-    "next": "^9.1.6",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-table": "^6.11.4"
+    "@zeit/next-css": "1.0.1",
+    "dfb-luis-apps-lib": "1.0.9",
+    "match-sorter": "4.0.2",
+    "next": "9.1.6",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-table": "6.11.4"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.25",
+    "@types/match-sorter": "4.0.0",
+    "@types/jest": "^24.9.0",
     "@types/node": "^13.1.1",
     "@types/react": "^16.9.17",
     "babel-core": "^6.26.3",
@@ -42,6 +42,7 @@
     "react-addons-test-utils": "^15.6.2",
     "react-hooks": "^1.0.1",
     "react-test-renderer": "^16.12.0",
+    "ts-jest": "^24.3.0",
     "typescript": "^3.7.4"
   }
 }
